@@ -1,4 +1,4 @@
-defmodule Support.FilerReader do
+defmodule Support.FileReader do
   @moduledoc false
 
   @spec read_file(String.t()) :: String.t()

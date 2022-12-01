@@ -9,7 +9,7 @@ defmodule Day1.Solution do
   """
 
   def part_one do
-    data = Support.FilerReader.read_into_lines("day1.dat")
+    data = Support.FileReader.read_into_lines("day1.dat")
     elves_calories = sorted_elves_calories(data)
     most_calories = Enum.at(elves_calories, 0, :none)
 
@@ -17,7 +17,7 @@ defmodule Day1.Solution do
   end
 
   def part_two do
-    data = Support.FilerReader.read_into_lines("day1.dat")
+    data = Support.FileReader.read_into_lines("day1.dat")
     elves_calories = sorted_elves_calories(data)
     top_three_calories = elves_calories
     |> Enum.take(3)
