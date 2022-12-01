@@ -3,7 +3,5 @@ defmodule Day1.SolutionTest do
 
   alias Day1.Solution
 
-  @moduletag :capture_log
-
   doctest Solution
 end
