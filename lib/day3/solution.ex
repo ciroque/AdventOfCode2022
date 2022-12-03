@@ -4,7 +4,7 @@ defmodule Day3.Solution do
 
       iex> {:ok, %{answer: 8349}} = Day3.Solution.part_one()
 
-      iex> {:ok, %{answer: nil}} = Day3.Solution.part_two()
+      iex> {:ok, %{answer: 2681}} = Day3.Solution.part_two()
 
   """
 
@@ -30,7 +30,7 @@ defmodule Day3.Solution do
 
     {:ok, %{answer: result}}
 
-    {:not_implemented, %{answer: result}}
+    {:ok, %{answer: result}}
   end
 
   defp calculate_priorities(items) do
