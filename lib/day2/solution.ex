@@ -4,7 +4,7 @@ defmodule Day2.Solution do
 
       iex> {:ok, %{answer: 12458}} = Day2.Solution.part_one()
 
-      iex> {:ok, %{answer: nil}} = Day2.Solution.part_two()
+      iex> {:ok, %{answer: 12683}} = Day2.Solution.part_two()
 
   """
 
