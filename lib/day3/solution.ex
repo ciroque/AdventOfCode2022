@@ -9,8 +9,9 @@ defmodule Day3.Solution do
   """
 
   def part_one do
-    rucksacks = Support.FileReader.read_into_lines("day3.dat")
-    result = rucksacks
+    data = Support.FileReader.read_into_lines("day3.dat")
+
+    result = data
     |> load_into_rucksack()
     |> find_common_items_across_rucksacks()
     |> calculate_priorities()
@@ -29,8 +30,6 @@ defmodule Day3.Solution do
     |> Enum.sum()
 
     {:ok, %{answer: result}}
-
-    {:ok, %{answer: result}}
   end
 
   defp calculate_priorities(items) do
@@ -43,26 +42,23 @@ defmodule Day3.Solution do
   defp find_common_items_across_rucksacks(rucksacks), do: Enum.map(rucksacks, &find_common_items_in_rucksack/1)
 
   defp find_common_items_in_group([rucksack_one, rucksack_two, rucksack_three] = _group) do
-
-    rucksack_one_list = split_string(rucksack_one)
-    rucksack_two_list = split_string(rucksack_two)
-    rucksack_three_list = split_string(rucksack_three)
-
-    rucksack_one_ms = MapSet.new(rucksack_one_list)
-    rucksack_two_ms = MapSet.new(rucksack_two_list)
-    rucksack_three_ms = MapSet.new(rucksack_three_list)
+    rucksack_one_ms = new_map_set(rucksack_one)
+    rucksack_two_ms = new_map_set(rucksack_two)
+    rucksack_three_ms = new_map_set(rucksack_three)
 
     rucksack_one_two_intersection = MapSet.intersection(rucksack_one_ms, rucksack_two_ms)
     final_intersection = MapSet.intersection(rucksack_one_two_intersection, rucksack_three_ms)
+
     [common_item|_] = MapSet.to_list(final_intersection)
 
     common_item
   end
 
   defp find_common_items_in_rucksack({compartment_one, compartment_two} = _rucksack) do
-    compartment_one_list = split_string(compartment_one)
-    compartment_two_list = split_string(compartment_two)
-    intersection = MapSet.intersection(MapSet.new(compartment_one_list), MapSet.new(compartment_two_list))
+    compartment_one_ms = new_map_set(compartment_one)
+    compartment_two_ms = new_map_set(compartment_two)
+
+    intersection = MapSet.intersection(compartment_one_ms, compartment_two_ms)
 
     [priority | _] = MapSet.to_list(intersection)
 
@@ -72,6 +68,12 @@ defmodule Day3.Solution do
   defp group_into_threes(data), do: Enum.chunk_every(data, 3)
 
   defp load_into_rucksack(data), do: Enum.map(data, &split_into_compartments/1)
+
+  defp new_map_set(string) do
+    string
+    |> split_string()
+    |> MapSet.new()
+  end
 
   def priority_map do
     split_string("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
